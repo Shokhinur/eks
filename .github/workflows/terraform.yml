@@ -30,11 +30,13 @@ jobs:
     - name: Initialize Terraform
       run: terraform init
 
-    # - name: Refresh Terraform State
-    #   run: terraform refresh
+    - name: Refresh Terraform State
+      run: terraform refresh
 
-    - name: Terraform Plan
-      run: terraform plan
+    - name: Remove Non-Existent Security Groups from State
+      run: |
+        terraform state rm aws_security_group.sg-029c0e42ad84218ef
+        terraform state rm aws_security_group.sg-0b8d3476e4e817e2a
 
     - name: Terraform Destroy
       run: terraform destroy --auto-approve
