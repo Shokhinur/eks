@@ -27,16 +27,12 @@ jobs:
         echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> $GITHUB_ENV
         echo "AWS_DEFAULT_REGION=${{ secrets.AWS_DEFAULT_REGION }}" >> $GITHUB_ENV
 
+
     - name: Initialize Terraform
       run: terraform init
 
-    - name: Refresh Terraform State
-      run: terraform refresh
-
-  
+    - name: Terraform Plan
+      run: terraform plan
 
     - name: Terraform Apply
-      run: terraform apply --auto-approve
-
-
-
+      run: terraform destroy  --auto-approve
